@@ -27,24 +27,23 @@ class TicTacToeGame(gtk.Builder):
 		self.connect_signals(self)
 
 		# connect cell's event with signal handler and coordinates data
-		self.cell11.connect("toggled", self.on_cell_toggled, "1 1")
-		self.cell12.connect("toggled", self.on_cell_toggled, "1 2")
-		self.cell13.connect("toggled", self.on_cell_toggled, "1 3")
+		self.cell11.connect("toggled", self.on_cell_toggled, "0 0")
+		self.cell12.connect("toggled", self.on_cell_toggled, "0 1")
+		self.cell13.connect("toggled", self.on_cell_toggled, "0 2")
 
-		self.cell21.connect("toggled", self.on_cell_toggled, "2 1")
-		self.cell22.connect("toggled", self.on_cell_toggled, "2 2")
-		self.cell23.connect("toggled", self.on_cell_toggled, "2 3")
+		self.cell21.connect("toggled", self.on_cell_toggled, "1 0")
+		self.cell22.connect("toggled", self.on_cell_toggled, "1 1")
+		self.cell23.connect("toggled", self.on_cell_toggled, "1 2")
 
-		self.cell31.connect("toggled", self.on_cell_toggled, "3 1")
-		self.cell32.connect("toggled", self.on_cell_toggled, "3 2")
-		self.cell33.connect("toggled", self.on_cell_toggled, "3 3")
+		self.cell31.connect("toggled", self.on_cell_toggled, "2 0")
+		self.cell32.connect("toggled", self.on_cell_toggled, "2 1")
+		self.cell33.connect("toggled", self.on_cell_toggled, "2 2")
 
 		#self.TicTacToeWindow.connect("delete-event", self.on_window1_delete_event)
 		self.TicTacToeWindow.show_all()
 
-
-
-		ttc.DEBUG = 1
+		# accept global or command line arg value
+		# ttc.DEBUG = 1
 
 		self.s = self._get_client_socket()
 
@@ -86,7 +85,6 @@ class TicTacToeGame(gtk.Builder):
 			self.show_error_dialog(str(exp))
 			sys.exit(1)
 
-
 		return s
 
 
@@ -101,7 +99,7 @@ class TicTacToeGame(gtk.Builder):
 			return msg
 
 		except Exception as exp:
-			ttc.d("2 {}".format(exp))
+			ttc.d("2: {}".format(exp))
 			self.show_error_dialog(str(exp))
 			self.on_TicTacToeWindow_delete_event(self.TicTacToeWindow, "delete-event")
 
@@ -267,7 +265,10 @@ class TicTacToeGame(gtk.Builder):
 			row = tmp_dict["step"][0]
 			col = tmp_dict["step"][1]
 
-			cell_name = "cell" + str(row) + str(col)
+			# server sends coordinates - indexes (from 0,0)
+			# but buttons in the gui named from 1,1
+			# so, plus one.
+			cell_name = "cell" + str(row + 1) + str(col + 1)
 			ttc.d("apply server step, try to access : {}".format(cell_name))
 
 			cell = self.get_object(cell_name)
