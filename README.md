@@ -2,9 +2,15 @@
 
 It's simple, client-server (via INET-stream-sockets) game with gui-client on GTK2.
 
+There are console and GUI versions of client.
+
+**Requirements**:
+
+* python >= 2.7
+* gtk >= 2.16
+
 
 ## How to play
-
 
 ### Local
 
@@ -20,6 +26,7 @@ It's simple, client-server (via INET-stream-sockets) game with gui-client on GTK
 2. Player one start a server on some *port* (default - 64501)
 3. Player two start a client with args `--host <player 1 IP> --port PORT`
 4. Enjoy
+
 
 
 
