@@ -244,56 +244,7 @@ def has_line_with_two_moves(game_field, move_kind):
 	# oh no =\
 	return [ False, [-1, -1] ]
 
-# --------------------------------------------------------------------------- #
 
-"""
-def make_move(game_field, move_kind):
-	##Need to get coordinates of empty cell in line.
-	##We have checked it, so, it exists
-
-		# все горизонталки
-		for line in game_field:
-			if line.count(move_kind) >= 2:
-				return [line][line.index(move_kind)]
-
-		count=0
-		#все вертикалки
-		for index in range(len(game_field)):
-			count+= 1 if game_field[index][0] == move_kind else 0
-			count+= 1 if game_field[index][1] == move_kind else 0
-			count+= 1 if game_field[index][2] == move_kind else 0
-
-			if count >= 2:
-				if game_field[index][0] != move_kind: 
-					return [index, 0]
-				if game_field[index][1] != move_kind: 
-					return [index, 1]
-				if game_field[index][2] != move_kind: 
-					return [index, 2]
-
-		#все диагоналки
-		count+= 1 if game_field[0][0] == move_kind else 0
-		count+= 1 if game_field[1][1] == move_kind else 0
-		count+= 1 if game_field[2][2] == move_kind else 0
-		if count >= 2:
-				if game_field[0][0] != move_kind: 
-					return [0, 0]
-				if game_field[1][1] != move_kind: 
-					return [1, 1]
-				if game_field[2][2] != move_kind: 
-					return [2, 2]
-
-		count+= 1 if game_field[0][2] == move_kind else 0
-		count+= 1 if game_field[1][1] == move_kind else 0
-		count+= 1 if game_field[2][0] == move_kind else 0
-		if count >= 2:
-				if game_field[0][2] != move_kind: 
-					return [0, 2]
-				if game_field[1][1] != move_kind: 
-					return [1, 1]
-				if game_field[2][0] != move_kind: 
-					return [2, 0]
-"""
 # --------------------------------------------------------------------------- #
 
 def do_server_step (game_field):
