@@ -215,6 +215,7 @@ def has_line_with_two_moves(game_field, move_kind):
 
 
 	# check all rows and cols
+	
 	for j in range(length):
 		# get row and col as lists
 		row = [ gf[j][i] for i in range(length) ]
@@ -237,7 +238,7 @@ def has_line_with_two_moves(game_field, move_kind):
 	diag_2 = [ gf[2][0], gf[1][1], gf[0][2] ]
 	if diag_2.count(move_kind) == 2 and diag_2.count(ttc.EMPTY_RAW_STEP) == 1:
 		j = diag_2.index(ttc.EMPTY_RAW_STEP)
-		i = -i + 2
+		i = -j + 2
 		return [ True, [i, j] ]
 
 	# oh no =\
@@ -340,6 +341,14 @@ def do_server_step (game_field):
 		return tmp
 
 
+	# если на линии две наши -- дополняем #
+	has_line_with_2_friendly_cells = has_line_with_two_moves(game_field, ttc.SERVER_RAW_STEP)
+	if has_line_with_2_friendly_cells[0]:
+		tmp["step"] = has_line_with_2_friendly_cells[1]
+		ttc.d("step 2+ {0}".format(tmp["step"]))
+		return tmp
+
+
 	# если на линии две чужие -- разбиваем #
 	has_line_with_2_enemy_cell = has_line_with_two_moves(game_field, ttc.USER_RAW_STEP)
 	if has_line_with_2_enemy_cell[0]:
@@ -348,12 +357,6 @@ def do_server_step (game_field):
 		return tmp
 
 
-	# если на линии две наши -- дополняем #
-	has_line_with_2_friendly_cells = has_line_with_two_moves(game_field, ttc.SERVER_RAW_STEP)
-	if has_line_with_2_friendly_cells[0]:
-		tmp["step"] = has_line_with_2_friendly_cells[1]
-		ttc.d("step 2+' {0}".format(tmp["step"]))
-		return tmp
 
 
 
