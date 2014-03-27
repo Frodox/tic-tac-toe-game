@@ -1,5 +1,7 @@
 # Tic Tac Toe game
 
+*version*: 1.1
+
 It's simple, client-server (via INET-stream-sockets) game with gui-client on GTK2.
 
 There are console and GUI versions of client.
