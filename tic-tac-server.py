@@ -72,6 +72,7 @@ def main():
 					user_step = ttc.get_msg_from_socket(clientsocket, exception=True, ex=False)
 				except Exception as exp:
 					ttc.d(exp)
+					ttc.d("\n" + 40*"=" + "\n")
 					break;
 
 
@@ -296,7 +297,7 @@ def do_server_step (game_field):
 	has_line_with_2_friendly_cells = has_line_with_two_moves(game_field, ttc.SERVER_RAW_STEP)
 	if has_line_with_2_friendly_cells[0]:
 		tmp["step"] = has_line_with_2_friendly_cells[1]
-		ttc.d("step 2+ {0}".format(tmp["step"]))
+		ttc.d("step 2 attack {0}".format(tmp["step"]))
 		return tmp
 
 
@@ -304,7 +305,7 @@ def do_server_step (game_field):
 	has_line_with_2_enemy_cell = has_line_with_two_moves(game_field, ttc.USER_RAW_STEP)
 	if has_line_with_2_enemy_cell[0]:
 		tmp["step"] = has_line_with_2_enemy_cell[1]
-		ttc.d("step 2- {0}".format(tmp["step"]))
+		ttc.d("step 2 def {0}".format(tmp["step"]))
 		return tmp
 
 
@@ -353,17 +354,7 @@ def get_winner (game_field):
 
 
 	try:
-
-		### check for tie, by counting empty cells on every line
-		empty_count = 0
-		for line in game_field:
-			empty_count += line.count(empty)
-		if 0 == empty_count:
-			winner = 3
-			raise Exception("TIE! no more free space")
-
-
-		### check for winner
+		### check for a winner
 
 		# by rows and cols...
 		for j in range(length):
@@ -377,7 +368,7 @@ def get_winner (game_field):
 				raise Exception("Server wins!")
 
 
-		# by diagonals...
+		# by diagonals
 		for diag in [ [gf[0][0], gf[1][1], gf[2][2]], [gf[0][2], gf[1][1], gf[2][0]] ]:
 			if diag.count(cross) == length:
 				winner = 2
@@ -385,6 +376,15 @@ def get_winner (game_field):
 			elif diag.count(zeros) == length:
 				winner = 1
 				raise Exception("Server wins!")
+
+
+		### check for tie, by counting empty cells on every line
+		empty_count = 0
+		for line in game_field:
+			empty_count += line.count(empty)
+		if 0 == empty_count:
+			winner = 3
+			raise Exception("TIE! no more free space")
 
 
 	except Exception as ex:
