@@ -230,12 +230,20 @@ name "fig:Условие-лабораторной-работы"
 Подход
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+Пишем про технологии, которые выбрали и спользовали
+\end_layout
+
+\begin_layout Subsection
 Алгоритм
 \end_layout
 
 \begin_layout Standard
-, как, чё, к чему.
+Как и кто ходит, в каком порядке, рисуем блок-схему,
+\end_layout
+
+\begin_layout Standard
+примеры кода
 \end_layout
 
 \begin_layout Section
@@ -243,7 +251,21 @@ name "fig:Условие-лабораторной-работы"
 \end_layout
 
 \begin_layout Standard
-Код доступен здесь
+Полный код лабораторной работы можно скачать на этой страничке в интернете:
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\family typewriter
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/Jecomire/tic-tac-toe-game"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
