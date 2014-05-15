@@ -236,10 +236,31 @@ name "fig:Условие-лабораторной-работы"
  Самый простой интерфейс обмена данными --- сокеты.
  Таким образом, общение между клиентом и сервером осуществляется посредством
  Inet Stream сокетов.
+ В качестве языка для реализации выбран
+\begin_inset space ~
+\end_inset
+
+--- Python, в качестве графической библиотеки
+\begin_inset space ~
+\end_inset
+
+--- Gtk.
 \end_layout
 
 \begin_layout Subsection
 Алгоритм
+\end_layout
+
+\begin_layout Standard
+Процесс игры наглядно изображён на рисунке
+\begin_inset space ~
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Разберём его по шагам.
 \end_layout
 
 \begin_layout Standard
@@ -248,6 +269,36 @@ name "fig:Условие-лабораторной-работы"
 
 \begin_layout Standard
 примеры кода
+\end_layout
+
+\begin_layout Standard
+Сервер ждёт входящего
+\end_layout
+
+\begin_layout Standard
+клиент подсоединяется, и ждёт сообщения
+\end_layout
+
+\begin_layout Standard
+сервер проваливается ниже и отправляет Привет и ждёт хода
+\end_layout
+
+\begin_layout Standard
+клиент читает привет и спрашивает ход игрока
+\end_layout
+
+\begin_layout Standard
+клиент отправляет ход игрока и ждёт следующее сообщение
+\end_layout
+
+\begin_layout Standard
+сервер получает ход игрока, ходит его, делает свой ход, отвечает клиенту,
+ 
+\end_layout
+
+\begin_layout Standard
+Сервер ждёт нового сообщения от клиента.
+ Цикл.
 \end_layout
 
 \begin_layout Section
