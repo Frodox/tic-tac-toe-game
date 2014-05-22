@@ -214,7 +214,8 @@ class TicTacToeGame(gtk.Builder):
 
 
 		# create correct json-turn
-		### suppose, developer is True man, and all data is correct here.
+		### suppose, developer is True man,
+		### and all data is correct here.)
 		user_turn_json = self.convert_str_to_json_dict_step(data)
 
 
@@ -243,7 +244,7 @@ class TicTacToeGame(gtk.Builder):
 
 
 		# check for winners or TIE
-		# exit with msg if winner exist
+		# exit with msg if a winner exists
 		self.handle_server_answer(server_turn_json)
 
 		# unlock UI
