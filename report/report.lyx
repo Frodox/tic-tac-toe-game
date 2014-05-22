@@ -1,0 +1,1691 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass extarticle
+\begin_preamble
+\usepackage{listings}
+
+\usepackage{indentfirst} 	% ДелаетCambridgeUS отступ первой строки после заголовков
+\usepackage{cmap}       % Поддержка поиска русских слов в PDF (pdflatex)
+\usepackage[T2C]{fontenc}
+
+\usepackage{xcolor}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding cp1251
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 14
+\spacing onehalf
+\use_hyperref true
+\pdf_title "Отчёт по рабораторной работе, Рыбников Виталий"
+\pdf_author "Vitaly Rybnikov, MEPHI 2014"
+\pdf_keywords "сит, python, gtk"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 2cm
+\rightmargin 1.5cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "basicstyle={\small\ttfamily},breaklines=true,commentstyle={\color{gray}},frame=tb,keywordstyle={\color{blue}},prebreak={\textbackslash},tabsize=4"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size larger
+Национальный исследовательский ядерный 
+\begin_inset Newline newline
+\end_inset
+
+университет 
+\begin_inset Quotes fld
+\end_inset
+
+МИФИ
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+Лабораторная работа по курсу 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Quotes fld
+\end_inset
+
+Сетевые информационные технологии
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align right
+
+\size large
+Выполнил: студент группы k8-361,
+\begin_inset Newline newline
+\end_inset
+
+Рыбников Виталий
+\end_layout
+
+\begin_layout Section*
+Цель работы:
+\end_layout
+
+\begin_layout Standard
+Разработать клиент-серверное приложение, взаимодействующее на основе протокола
+ 
+\family typewriter
+TCP/IP
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Клиент
+\series default
+ должен быть написан под Windows с использованием С/С++ (MFC, .NET), JAVA
+ или др.
+ и иметь графический интерфейс.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Сервер
+\series default
+ должен быть написан под UNIX (без графического интерфейса).
+ Работа приложения демонстрируется в компьютерном классе.
+\end_layout
+
+\begin_layout Section*
+
+\series bold
+Постановка задачи
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Крестики-нолики на поле 3х3
+\series default
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Клиент
+\series default
+ делает ход, ставит крестик, и сообщат об этом серверу.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Сервер
+\series default
+ делает ход, ставит нолик, и сообщат об этом клиенту.
+ 
+\end_layout
+
+\begin_layout Standard
+Выигрывает тот, кто поставит в ряд по вертикали, горизонтали или диагонали
+ три крестика (нолика).
+\end_layout
+
+\begin_layout Section*
+Реализация
+\end_layout
+
+\begin_layout Subsection*
+Подход
+\end_layout
+
+\begin_layout Standard
+В качестве интерфейса обмена данными выбран интерфейс сокетов.
+ Таким образом, общение между клиентом и сервером осуществляется посредством
+ Inet Stream сокетов.
+ В качестве языка для реализации выбран
+\begin_inset space ~
+\end_inset
+
+--- Python, в качестве библиотеки, для создания графического приложения
+\begin_inset space ~
+\end_inset
+
+--- Gtk.
+\end_layout
+
+\begin_layout Subsection*
+Алгоритм
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename alghoritm.pdf
+	lyxscale 30
+	width 85text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Алгоритм клиент-серверной игры 
+\begin_inset Quotes fld
+\end_inset
+
+Крестики-нолики
+\begin_inset Quotes frd
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Алгоритм-клиент-серверной-игры"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Общение между клиентом и сервером решено было осуществлять в формате 
+\family typewriter
+json
+\family default
+.
+ Язык Python предоставляет удобные средства для работы с этим форматом,
+ позволяющие в один вызов конвертировать объекты
+\begin_inset space ~
+\end_inset
+
+(списки, словари, массивы) в 
+\family typewriter
+json
+\family default
+-формат и назад.
+ 
+\end_layout
+
+\begin_layout Standard
+Пример передаваемого сообщения:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+{"step" : [1, 1],
+\end_layout
+
+\begin_layout Plain Layout
+
+ "winner": 0,
+\end_layout
+
+\begin_layout Plain Layout
+
+ "error" : false }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+step
+\family default
+ --- поле содержит координаты хода игрока/сервера в формате 
+\emph on
+[строка, столбец]
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+winner
+\family default
+ --- поле содержит номер победителя:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+0
+\family default
+ --- победитель отсутствует
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+1
+\family default
+ --- выиграл клиент
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+2
+\family default
+ --- выиграл сервер
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+3
+\family default
+ --- ничья
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+error
+\family default
+ --- логическое поле, сигнализирующее о наличии ошибки (обычно, об ошибке
+ ввода пользователя)
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Логика клиенской и серверной частей довольно наглядно представлена на упрощённой
+ схеме
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Алгоритм-клиент-серверной-игры"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Всё приложение состоит из следующих файлов:
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+tic-tac-server.py
+\family default
+ --- серверная консольная часть
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+tic-tac-client.py
+\family default
+ --- клиентская консольная часть
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+tic-tac-client-gui.py
+\family default
+ --- клиентская графическая часть
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+tic_tac_common.py
+\family default
+ --- общая логика для всего проекта (используется как клиентской так и серверной
+ частью)
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Standard
+Как видно, в ходе выполнения лабораторной работы, было реализовано две клиенские
+ части --- консольная и графическая.
+ Это сделано в учебных целях, для лучшего понимания принципа работы с сетевыми
+ сокетами.
+ После клиентской консольной была написана клиентская графическая часть,
+ которая использует ту же логику, что и консольная
+\begin_inset space ~
+\end_inset
+
+(общая логика выделена в отдельный модуль, что исключает дублирование кода).
+\end_layout
+
+\begin_layout Standard
+Внешний вид графического приложения представлен на рисунке
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Графическая-клиентская-часть"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename screenshot.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Графическая клиентская часть
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Графическая-клиентская-часть"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Игрок совершает ход, нажимая на пустые кнопки.
+ Для простоты реализации, игрок всегда ходит 
+\begin_inset Quotes fld
+\end_inset
+
+крестиками
+\begin_inset Quotes frd
+\end_inset
+
+.
+ В случае завершения игры, появляется сообщение о победе того, или иного
+ игрока, как на рисунке
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Конец-игры"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename game_end.png
+	lyxscale 50
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Конец игры
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Конец-игры"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Полный код лабораторной работы можно скачать по этой ссылке: 
+\begin_inset Newline newline
+\end_inset
+
+
+\family typewriter
+
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/Jecomire/tic-tac-toe-game"
+
+\end_inset
+
+
+\family default
+.
+ Ключевые моменты представлены в приложениях.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Приложение 1
+\end_layout
+
+\begin_layout Standard
+Основная логика серверной части представлена ниже:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily},breaklines=true,language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def main():
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	s = get_server_socket()
+\end_layout
+
+\begin_layout Plain Layout
+
+	try:
+\end_layout
+
+\begin_layout Plain Layout
+
+		### endless loop, for multiple games
+\end_layout
+
+\begin_layout Plain Layout
+
+		while True:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			print ('Waiting for a player...')
+\end_layout
+
+\begin_layout Plain Layout
+
+			(clientsocket, address) = s.accept() # blocking line
+\end_layout
+
+\begin_layout Plain Layout
+
+			print ('New player came from {0}
+\backslash
+n'.format(address))
+\end_layout
+
+\begin_layout Plain Layout
+
+			clientsocket.sendall("Hello from Tic Tac Toe server!")
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			gf = copy.deepcopy(ttc.GAME_FIELD)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			### one game, loop until winner or disconnect
+\end_layout
+
+\begin_layout Plain Layout
+
+			while True:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				#B get user's turn
+\end_layout
+
+\begin_layout Plain Layout
+
+				try:
+\end_layout
+
+\begin_layout Plain Layout
+
+					print("Wait for user's turn...")
+\end_layout
+
+\begin_layout Plain Layout
+
+					user_step = ttc.get_msg_from_socket(clientsocket, 
+\end_layout
+
+\begin_layout Plain Layout
+
+									exception=True, ex=False)
+\end_layout
+
+\begin_layout Plain Layout
+
+				except Exception as exp:
+\end_layout
+
+\begin_layout Plain Layout
+
+					ttc.d(exp)
+\end_layout
+
+\begin_layout Plain Layout
+
+					ttc.d("
+\backslash
+n" + 40*"=" + "
+\backslash
+n")
+\end_layout
+
+\begin_layout Plain Layout
+
+					break;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				# validate step #
+\end_layout
+
+\begin_layout Plain Layout
+
+				step_check = {}
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.d("user raw turn: {}".format(user_step))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				# thus, if True -> error = False
+\end_layout
+
+\begin_layout Plain Layout
+
+				step_check["error"] = not ttc.is_step_correct (
+\end_layout
+
+\begin_layout Plain Layout
+
+						user_step
+\end_layout
+
+\begin_layout Plain Layout
+
+						, gf) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				if not step_check["error"]:
+\end_layout
+
+\begin_layout Plain Layout
+
+					# i.e.
+ error == False
+\end_layout
+
+\begin_layout Plain Layout
+
+					ttc.apply_turn (user_step
+\end_layout
+
+\begin_layout Plain Layout
+
+							, gf
+\end_layout
+
+\begin_layout Plain Layout
+
+							, ttc.USER_RAW_STEP)
+\end_layout
+
+\begin_layout Plain Layout
+
+					step_check["winner"] = get_winner(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+					ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+				else:
+\end_layout
+
+\begin_layout Plain Layout
+
+					step_check["winner"] = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				#B answer, is step correct #
+\end_layout
+
+\begin_layout Plain Layout
+
+				step_check_str = json.dumps(step_check)
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.d("I will send: {0}".format(step_check_str))
+\end_layout
+
+\begin_layout Plain Layout
+
+				clientsocket.sendall(step_check_str)
+\end_layout
+
+\begin_layout Plain Layout
+
+				time.sleep(0.1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				# if an error occured earlier -> 
+\end_layout
+
+\begin_layout Plain Layout
+
+				# get new answer from user
+\end_layout
+
+\begin_layout Plain Layout
+
+				if True == step_check["error"] or 0 != step_check["winner"]:
+\end_layout
+
+\begin_layout Plain Layout
+
+					continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				# do server step #
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.d("proceed server turn")
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				server_step_dict = do_server_step(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.d("server step: {}".format(server_step_dict))
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.apply_turn(json.dumps(server_step_dict)
+\end_layout
+
+\begin_layout Plain Layout
+
+							, gf
+\end_layout
+
+\begin_layout Plain Layout
+
+							, ttc.SERVER_RAW_STEP)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				# check for winners
+\end_layout
+
+\begin_layout Plain Layout
+
+				server_step_dict["winner"] = get_winner(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+				server_step_dict["error"]  = False
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				#B send server turn with winner result
+\end_layout
+
+\begin_layout Plain Layout
+
+				clientsocket.sendall( json.dumps(server_step_dict) )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	except KeyboardInterrupt as exp:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print ("
+\backslash
+nShutting down...
+ {0}".format(exp))
+\end_layout
+
+\begin_layout Plain Layout
+
+	except Exception as exp:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print("Sorry, but: {0}".format(exp))
+\end_layout
+
+\begin_layout Plain Layout
+
+	except:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print("Unexpected error:", sys.exc_info()[0])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	try:
+\end_layout
+
+\begin_layout Plain Layout
+
+		clientsocket.close()
+\end_layout
+
+\begin_layout Plain Layout
+
+		s.close()
+\end_layout
+
+\begin_layout Plain Layout
+
+	except Exception as exp:
+\end_layout
+
+\begin_layout Plain Layout
+
+		# not an error on most cases
+\end_layout
+
+\begin_layout Plain Layout
+
+		ttc.d("Ooops > {0}".format(exp))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	sys.exit(0)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Приложение 2
+\end_layout
+
+\begin_layout Standard
+Основная логика клиентской части (консольная) представлена ниже:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\small\ttfamily},breaklines=true,language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def main():
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	s = ttc.get_client_socket()
+\end_layout
+
+\begin_layout Plain Layout
+
+	try:
+\end_layout
+
+\begin_layout Plain Layout
+
+		# get hello
+\end_layout
+
+\begin_layout Plain Layout
+
+		hello_msg = ttc.get_msg_from_socket(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+		print("
+\backslash
+n{0}
+\backslash
+n".format(hello_msg))
+\end_layout
+
+\begin_layout Plain Layout
+
+		print('''
+\end_layout
+
+\begin_layout Plain Layout
+
+You are a cross (X).
+\end_layout
+
+\begin_layout Plain Layout
+
+Enter coordinats, where to put next cross.
+\end_layout
+
+\begin_layout Plain Layout
+
+Suppose, left top corner is (0, 0).
+\end_layout
+
+\begin_layout Plain Layout
+
+Input in format: <int> <int> <hit Return>
+\end_layout
+
+\begin_layout Plain Layout
+
+''')
+\end_layout
+
+\begin_layout Plain Layout
+
+		gf = copy.deepcopy(ttc.GAME_FIELD)
+\end_layout
+
+\begin_layout Plain Layout
+
+		ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		### loop for a game, untill winner or ^C
+\end_layout
+
+\begin_layout Plain Layout
+
+		while True:
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			#B get a step from user
+\end_layout
+
+\begin_layout Plain Layout
+
+			turn_json = ttc.get_turn_from_user(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			#B send step to the server
+\end_layout
+
+\begin_layout Plain Layout
+
+			s.sendall(turn_json)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			#B get server answer about user step
+\end_layout
+
+\begin_layout Plain Layout
+
+			res = ttc.get_msg_from_socket(s, exception=False, ex=True)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			# if error - ask step again
+\end_layout
+
+\begin_layout Plain Layout
+
+			if is_error_in_answer(res):
+\end_layout
+
+\begin_layout Plain Layout
+
+				print("Ou, bad turn, try again.
+\backslash
+n")
+\end_layout
+
+\begin_layout Plain Layout
+
+				continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+			else:
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.apply_turn(turn_json, gf, ttc.USER_RAW_STEP)
+\end_layout
+
+\begin_layout Plain Layout
+
+				ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			# check for winners in the answer, 
+\end_layout
+
+\begin_layout Plain Layout
+
+			# if exist any - game ends.
+\end_layout
+
+\begin_layout Plain Layout
+
+			handle_winner_variable(res)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			#B get server step
+\end_layout
+
+\begin_layout Plain Layout
+
+			print("Wait for server response...")
+\end_layout
+
+\begin_layout Plain Layout
+
+			server_step = ttc.get_msg_from_socket(s)
+\end_layout
+
+\begin_layout Plain Layout
+
+			ttc.d("server step: {0}
+\backslash
+n".format(server_step))
+\end_layout
+
+\begin_layout Plain Layout
+
+			ttc.apply_turn(server_step, gf, ttc.SERVER_RAW_STEP)
+\end_layout
+
+\begin_layout Plain Layout
+
+			handle_winner_variable(server_step)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	except KeyboardInterrupt as k:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print ("
+\backslash
+nShutting down...
+ {0}".format(k))
+\end_layout
+
+\begin_layout Plain Layout
+
+	except Exception as exp:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print(": {0}".format(exp))
+\end_layout
+
+\begin_layout Plain Layout
+
+		ttc.print_game_field(gf)
+\end_layout
+
+\begin_layout Plain Layout
+
+	except:
+\end_layout
+
+\begin_layout Plain Layout
+
+		print("Unexpected error:", sys.exc_info()[0])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	s.close()
+\end_layout
+
+\begin_layout Plain Layout
+
+	sys.exit(0)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Приложение 3
+\end_layout
+
+\begin_layout Standard
+Основная логика графической клиентской части представлена ниже:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language=Python"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+# ------------------------------------------------ #
+\end_layout
+
+\begin_layout Plain Layout
+
+# main game login is here
+\end_layout
+
+\begin_layout Plain Layout
+
+# ------------------------------------------------ #
+\end_layout
+
+\begin_layout Plain Layout
+
+	def on_cell_toggled (self, button, data=None):
+\end_layout
+
+\begin_layout Plain Layout
+
+		"""
+\end_layout
+
+\begin_layout Plain Layout
+
+		Toogle button with X or O
+\end_layout
+
+\begin_layout Plain Layout
+
+		"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# lock UI
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.TicTacToeWindow.set_sensitive(False)
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.statusbar.push(0
+\end_layout
+
+\begin_layout Plain Layout
+
+			, "Pressed btn with coords: {}".format(data))
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# lock cell
+\end_layout
+
+\begin_layout Plain Layout
+
+		button.set_sensitive(False)
+\end_layout
+
+\begin_layout Plain Layout
+
+		button.set_active(True)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# apply user turn
+\end_layout
+
+\begin_layout Plain Layout
+
+		button.set_label(ttc.USER_STEP)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# create correct json-turn
+\end_layout
+
+\begin_layout Plain Layout
+
+		### suppose, developer is True man,
+\end_layout
+
+\begin_layout Plain Layout
+
+		### and all data is correct here =)
+\end_layout
+
+\begin_layout Plain Layout
+
+		user_turn_json = self.convert_str_to_json_dict_step(data)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# send turn to the server
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.s.sendall(user_turn_json)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# get answer
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.statusbar.push(0, "Waiting for server validation...")
+\end_layout
+
+\begin_layout Plain Layout
+
+		res = self._get_msg_from_server_socket()
+\end_layout
+
+\begin_layout Plain Layout
+
+		time.sleep(0.1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# check for errors and winners in the answer
+\end_layout
+
+\begin_layout Plain Layout
+
+		# if winner - show msg and exit after that
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.handle_server_answer(res)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# get server's turn
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.statusbar.push(0, "Waiting for server's turn...")
+\end_layout
+
+\begin_layout Plain Layout
+
+		server_turn_json = self._get_msg_from_server_socket()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# apply server's turn
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.apply_server_turn(server_turn_json)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# check for winners or TIE
+\end_layout
+
+\begin_layout Plain Layout
+
+		# exit with msg if a winner exists
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.handle_server_answer(server_turn_json)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# unlock UI
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.TicTacToeWindow.set_sensitive(True)
+\end_layout
+
+\begin_layout Plain Layout
+
+		self.statusbar.push(0, "Your turn")
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		# exit handler and wait for user turn
+\end_layout
+
+\begin_layout Plain Layout
+
+		return;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
