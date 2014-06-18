@@ -410,7 +410,7 @@ if __name__ == "__main__":
 						type=int)
 	parser.add_argument('--debug', help='show debug output', action='store_true')
 
-	parser.add_argument('-m', '--multyplayer', help='YOU want to play with user',
+	parser.add_argument('-m', '--multiplayer', help='YOU want to play with user',
 						action='store_true')
 
 	args = parser.parse_args()
