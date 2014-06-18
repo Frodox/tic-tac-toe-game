@@ -16,9 +16,9 @@ There are console and GUI versions of client.
 
 ### Local
 
-1. Clone repo
-2. Start server
-3. Start client
+1. Clone repo ( `git clone https://github.com/Frodox/tic-tac-toe-game.git` )
+2. Start server ( `./tic-tac-server.py` )
+3. Start client console or gui version ( `./tic-tac-client.py` )
 4. Enjoy.
 
 
@@ -26,10 +26,9 @@ There are console and GUI versions of client.
 
 1. Clone repo
 2. Player one start a server on some *port* (default - 64501)
-3. Player two start a client with args `--host <player 1 IP> --port PORT`
+3. Player two start a client like `./tic-tac-client.py --host <player 1 IP> --port PORT`
 4. Enjoy
 
 
 
-
-License: GPL v3.
+License: GPL v3
