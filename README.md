@@ -25,8 +25,8 @@ There are console and GUI versions of client.
 ### With friends
 
 1. Clone repo
-2. Player one start a server on some *port* (default - 64501)
-3. Player two start a client like `./tic-tac-client.py --host <player 1 IP> --port PORT`
+2. Player_1 starts a server in multyplayer mode on some *port*, like `./tic-tac-server.py -m -p 7777` (default port -- 64501); there is only console version of server
+3. Player_2 starts a console/gui client like `./tic-tac-client.py --host <player 1 IP> --port PORT`
 4. Enjoy
 
 
